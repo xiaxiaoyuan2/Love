@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Honey</title>
+	
+	<!-- 爱心 -->
+	<style>
+		html, body {
+					height: 100%;
+				}
+		
+				body {
+					margin: 0;
+					padding: 0;
+					background: #ffa5a5;
+					/*
+							定义body 渐变，向页面。
+		
+					*/
+		
+					/* background: linear-gradient(to bottom, #ffa5a5 0%,#ffd3d3 100%); */
+				}
+		
+				.chest {
+					width: 500px;
+					height: 500px;
+					position: relative;
+					left: 150px;
+				}
+		
+				.heart {
+					position: absolute;
+					z-index: 2;
+				    background: linear-gradient(-90deg, #F50A45 0%, #d5093c 40%);
+					animation: beat 1s ease 0s infinite normal;
+				}
+		
+				.heart.center {
+					background: linear-gradient(-45deg, #B80734 0%, #d5093c 40%);
+				}
+		
+				.heart.top {
+					z-index: 3;
+				}
+		
+				.side {
+					top: 100px;
+					width: 220px;
+					height: 220px;
+					border-radius: 110px;
+				}
+		
+				.center {
+					width: 210px;
+					height: 210px;
+					bottom: 100px;
+					left: 145px;
+					transform: rotateZ(225deg);
+					/*transform: rotate(45deg);*/
+				}
+		
+				.left {
+					left: 62px;
+				}
+		
+				.right {
+					right: 62px;
+				}
+		
+		
+				@keyframes beat {
+					0% {
+						transform: scale(1) rotate(225deg);
+						box-shadow:0 0 40px #d5093c;
+					}
+		
+					50% {
+						transform: scale(1.1) rotate(225deg);
+						box-shadow:0 0 70px #d5093c;
+					}
+					100% {
+						transform: scale(1) rotate(225deg);
+					box-shadow:0 0 40px #d5093c;
+					}
+				}
+	</style>
+
+	
+	<!-- 时间 -->
+	<script>
+		var temp;
+		var i = 0;
+		var arr=
+		[
+			"我爱你，胜过爱自己。", 
+			"一见如故，生万千欢喜心。", 
+			"林深时见鹿，海蓝时见鲸，梦醒时见你", 
+			"情不知所起，而一往情深，俗话不俗，只写给你。", 
+			"要是世上只有我们两个人多么好，我一定要把你欺负得哭不出来。",
+			"后来我开始疲于应付人事 懒散之处多处可见得 唯独对你 颇是上心",
+			"情不知所起，而一往情深，俗话不俗，只写给你。", 
+			"小生不才，一不小心爱上了姑娘。得姑娘青睐，扰姑娘良久，姑娘勿怪。",
+			"自此所有爱慕之意都脱于唇齿，寄于年华。",
+			"今生于此相遇，望能与姑娘谈笑风生，宠你入骨，惜你入心。",
+			"我们写的不仅是代码，而是我们读过的书 看过的电影 听过的音乐 走过的路 爱过的人",
+			"没了没了 告辞"
+		];
+		function a(){
+			var div= document.getElementById("time_div");
+			div.innerHTML = "<p>"+temp+"</p>";
+		}
+		function getFont(){
+			var div = document.getElementById("font_div");
+			div.innerHTML = "<p id=\"font_p\" style=\"\">"+arr[i++]+"</p>";
+			if(i == arr.length){
+				i = 0;
+			}
+		}
+		
+		function getTime(time) {
+			// 指定百日度期问
+			var EndTime = new Date(time);
+			var NowTime = new Date();
+			var seconds =(Date.parse(NowTime) - Date.parse(EndTime)) / 1000;
+			
+			var days = Math.floor(seconds / (3600 * 24));
+			seconds = seconds % (3600 * 24);
+			var hours = Math.floor(seconds / 3600);
+			if (hours < 10) {
+				hours = "0" + hours;
+			}
+			seconds = seconds % 3600;
+			var minutes = Math.floor(seconds / 60);
+			if (minutes < 10) {
+				minutes = "0" + minutes;
+			}
+			seconds = seconds % 60;
+			if (seconds < 10) {
+				seconds = "0" + seconds;
+			}
+			temp = "我们已经在一起了" + days + "天" + hours + "小时" + minutes + "分钟" + seconds + "秒"; 
+			
+			a();
+		}
+		window.setInterval("getTime('2019/10/25')",1000); 
+	</script>
+
+	<!-- 时间 -->
+	<style>
+		#time_div{
+			position: absolute;
+			top: 70%;
+			left: 200px;
+		}
+		#font_div{
+			position: absolute;
+			top: 50%;
+			left: 700px;
+		}
+		p{
+			color:#E74C3C;
+			font-family: arial;
+			font-size: 20px;
+		}
+		#font_p{
+			animation: fontP 1s linear forwards;
+		}
+		@keyframes fontP {
+			0% {
+			    
+			    opacity: 1;
+			}
+			100% {
+			    transform: translate(0%,-500%);
+			    opacity: 1;
+			}
+		}
+		
+	</style>
+	
+	
+	
+	
+	<!-- 鼠标跟随 -->
+	<style>
+		span {
+		    position: absolute;
+		    width: 100px;
+		    height: 100px;
+		    pointer-events: none;
+		    background-image: url(images/heart.png);
+		    background-size: cover;
+		    transform: translate(-50%,-50%);
+		    animation: animate 2s linear infinite;
+			z-index: 10;
+		}
+		
+		@keyframes animate {
+		    0% {
+		        transform: translate(-50%,-50%);
+		        opacity: 1;
+		        filter: hue-rotate(0deg);
+		    }
+		    100% {
+		        transform: translate(-50%,-1000%);
+		        opacity: 0;
+		        filter: hue-rotate(720deg);
+		    }
+		}
+	</style>
+
+	<!-- 鼠标跟随 -->
+	<script>
+			document.onmousemove = function(event){
+	        var body = document.querySelector("body");
+	        var heart = document.createElement("span");
+	        var x = event.offsetX;
+	        var y = event.offsetY;
+	        heart.style.left = x + "px";
+	        heart.style.top = y + "px";
+	        var size =Math.random()*100;
+	        heart.style.width = size + "px";
+	        heart.style.height = size + "px";
+	        body.appendChild(heart);
+	
+	        setTimeout(function(){
+	            heart.remove();
+	        },2000);
+	    }
+	</script>
+<!--  -->
+<style>
+	.body_left {
+	    width: 300px;
+	    height: 300px;
+	    left: 0;
+	    bottom: 110px;
+	    position: absolute;
+	    z-index: 98;
+	
+	}
+</style>
+</head>
+<body>
+	<div class="chest" onclick="getFont()">
+		<div class="heart left side top"></div>
+		<div class="heart center"></div>
+		<div class="heart right side"></div>
+	</div>
+	
+	<div id="time_div"></div>
+	
+	<div id="font_div"></div>
+	<div class="body_left">
+	    <img src="images/biubiubiu.gif" alt="" ondragstart='return false;'>
+	</div>
+</body>
+</html>
